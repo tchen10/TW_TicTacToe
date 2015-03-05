@@ -22,6 +22,7 @@ public class Game {
     public void startPlaying() {
         setInitialGameBoard();
         drawOngoingGameBoard(player1);
+        drawOngoingGameBoard(player2);
     }
 
     public void setInitialGameBoard() {
@@ -33,17 +34,26 @@ public class Game {
 
     public void drawOngoingGameBoard(Player player) {
         String playerMove = " " + player.getPlayerMove() + " ";
-        checkAvailablePlayerMove(row1, playerMove);
-        checkAvailablePlayerMove(row2, playerMove);
-        checkAvailablePlayerMove(row3, playerMove);
+        setPlayerMove(player, playerMove);
         drawGameBoard();
     }
 
-    private void checkAvailablePlayerMove(List<String> row, String playerMove) {
+    private void setPlayerMove(Player player, String playerMove) {
+        if (!isValidPlayerMove(row1, playerMove, player) &&
+                !isValidPlayerMove(row2, playerMove, player) &&
+                !isValidPlayerMove(row3, playerMove, player)) {
+            printStream.println("Location already taken");
+        }
+    }
+
+    private boolean isValidPlayerMove(List<String> row, String playerMove, Player player) {
+        boolean isValidMove = false;
         int position = row.indexOf(playerMove);
         if (row.contains(playerMove)) {
-            row.set(position, " X ");
+            row.set(position, player.getFormattedPlayerXO());
+            isValidMove = true;
         }
+        return isValidMove;
     }
 
     private void setInitialRowValues(List<String> row, String space1, String space2, String space3) {

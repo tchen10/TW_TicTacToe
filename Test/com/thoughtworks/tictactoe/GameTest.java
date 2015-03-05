@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class GameTest {
@@ -34,13 +35,48 @@ public class GameTest {
     }
 
     @Test
-    public void shouldPutXInRightSpaceWhenPlayerInputs1() {
+    public void shouldPutXWhenPlayer1Inputs() {
         when(player1.getPlayerMove()).thenReturn("1");
+        when(player1.getFormattedPlayerXO()).thenReturn(" X ");
         game.setInitialGameBoard();
         game.drawOngoingGameBoard(player1);
         verify(printStream).printf(" X ");
     }
 
+    @Test
+    public void shouldAddOToBoardWhenPlayer2Inputs() {
+        when(player1.getPlayerMove()).thenReturn("1");
+        when(player1.getFormattedPlayerXO()).thenReturn(" X ");
+        when(player2.getPlayerMove()).thenReturn("2");
+        when(player2.getFormattedPlayerXO()).thenReturn(" O ");
+
+        game.setInitialGameBoard();
+        game.drawOngoingGameBoard(player1);
+        game.drawOngoingGameBoard(player2);
+
+        verify(printStream).printf(" O ");
+        verify(printStream, times(2)).printf(" X ");
+
+    }
+
+    @Test
+    public void shouldTellUserSpaceIsTakenWhenSpaceIsTaken() {
+        when(player1.getPlayerMove()).thenReturn("1");
+        when(player1.getFormattedPlayerXO()).thenReturn(" X ");
+        when(player2.getPlayerMove()).thenReturn("1");
+        when(player2.getFormattedPlayerXO()).thenReturn(" O ");
+
+        game.setInitialGameBoard();
+        game.drawOngoingGameBoard(player1);
+        game.drawOngoingGameBoard(player2);
+
+        verify(printStream).println("Location already taken");
+    }
+
+    @Test
+    public void shouldAlternateUsersUntilGameBoardIsFull() {
+
+    }
 
 
 }
