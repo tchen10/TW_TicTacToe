@@ -44,7 +44,7 @@ public class GameTest {
         when(player1.getFormattedPlayerXO()).thenReturn(" X ");
         game.setInitialGameBoard();
         game.drawOngoingGameBoard(player1);
-        verify(printStream).printf(" X ");
+        assertEquals(gameBoard.indexOf(" X "), 0);
     }
 
     @Test
@@ -58,9 +58,8 @@ public class GameTest {
         game.drawOngoingGameBoard(player1);
         game.drawOngoingGameBoard(player2);
 
-        verify(printStream).printf(" O ");
-        verify(printStream, times(2)).printf(" X ");
-
+        assertEquals(gameBoard.indexOf(" X "), 0);
+        assertEquals(gameBoard.indexOf(" O "), 2);
     }
 
     @Test
