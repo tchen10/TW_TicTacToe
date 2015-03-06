@@ -45,7 +45,7 @@ public class GameTest {
 
         game.play();
 
-        verify(printStream).println("Player X wins!");
+        verify(printStream).println("Player1 X wins!");
     }
 
 
