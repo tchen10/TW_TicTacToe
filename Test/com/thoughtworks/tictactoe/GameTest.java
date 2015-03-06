@@ -38,6 +38,13 @@ public class GameTest {
         verify(printStream).println("Game is a draw");
     }
 
+    @Test
+    public void shouldDisplayMessageWhenPlayerWins() {
+        when(player1.getFormattedPlayerSymbol()).thenReturn(" X ");
+        when(gameBoard.isWinningGame(player1)).thenReturn(true);
+        game.play();
+        verify(printStream).println("Player X wins!");
+    }
 
 
 }

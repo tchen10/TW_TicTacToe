@@ -24,11 +24,29 @@ public class GameBoard {
     }
 
     public boolean isWinningGame(Player player) {
-        String playerMove = player.getFormattedPlayerMove();
-        return boardValues.get(0).equals(playerMove) &&
-                boardValues.get(1).equals(playerMove) &&
-                boardValues.get(2).equals(playerMove);
+        String playerSymbol = player.getFormattedPlayerSymbol();
+        return checkWinningLine(playerSymbol, 0, 1, 2) ||
+                checkWinningLine(playerSymbol, 3, 4, 5) ||
+                checkWinningLine(playerSymbol, 6, 7, 8) ||
+                checkWinningLine(playerSymbol, 0, 3, 6) ||
+                checkWinningLine(playerSymbol, 1, 4, 7) ||
+                checkWinningLine(playerSymbol, 2, 5, 8) ||
+                checkWinningLine(playerSymbol, 0, 4, 8) ||
+                checkWinningLine(playerSymbol, 2, 4, 6);
+    }
 
+    private boolean checkWinningLine(String playerMove, int num1, int num2, int num3) {
+        String[] winningLine = new String[3];
+        winningLine[0] = boardValues.get(num1);
+        winningLine[1] = boardValues.get(num2);
+        winningLine[2] = boardValues.get(num3);
+        int moves = 0;
+        for (String boardValue : winningLine) {
+            if (boardValue.equals(playerMove)) {
+                moves++;
+            }
+        }
+        return moves == 3;
     }
 
 

@@ -71,13 +71,86 @@ public class GameBoardTest {
     }
 
     @Test
+    public void shouldNotReturnWinningGameTrueWhenRandomThree() {
+        Player player = mock(Player.class);
+        when(player.getFormattedPlayerSymbol()).thenReturn(" X ");
+        boardValues.set(0, " X ");
+        boardValues.set(3, " X ");
+        boardValues.set(6, " X ");
+        assertTrue(gameBoard.isWinningGame(player));
+    }
+
+    @Test
     public void shouldReturnWinningGameTrueWhenTopThreeInARowHorizontal() {
         Player player = mock(Player.class);
-        when(player.getFormattedPlayerMove()).thenReturn(" X ");
+        when(player.getFormattedPlayerSymbol()).thenReturn(" X ");
         boardValues.set(0, " X ");
         boardValues.set(1, " X ");
         boardValues.set(2, " X ");
         assertTrue(gameBoard.isWinningGame(player));
     }
 
+    @Test
+    public void shouldReturnWinningGameTrueWhenMiddleThreeInARowHorizontal() {
+        Player player = mock(Player.class);
+        when(player.getFormattedPlayerSymbol()).thenReturn(" X ");
+        boardValues.set(3, " X ");
+        boardValues.set(4, " X ");
+        boardValues.set(5, " X ");
+        assertTrue(gameBoard.isWinningGame(player));
+    }
+    @Test
+    public void shouldReturnWinningGameTrueWhenBottomThreeInARowHorizontal() {
+        Player player = mock(Player.class);
+        when(player.getFormattedPlayerSymbol()).thenReturn(" X ");
+        boardValues.set(6, " X ");
+        boardValues.set(7, " X ");
+        boardValues.set(8, " X ");
+        assertTrue(gameBoard.isWinningGame(player));
+    }
+    @Test
+    public void shouldReturnWinningGameTrueWhenLeftThreeInARowVertical() {
+        Player player = mock(Player.class);
+        when(player.getFormattedPlayerSymbol()).thenReturn(" X ");
+        boardValues.set(0, " X ");
+        boardValues.set(3, " X ");
+        boardValues.set(6, " X ");
+        assertTrue(gameBoard.isWinningGame(player));
+    }
+    @Test
+    public void shouldReturnWinningGameTrueWhenMiddleThreeInARowVertical() {
+        Player player = mock(Player.class);
+        when(player.getFormattedPlayerSymbol()).thenReturn(" X ");
+        boardValues.set(1, " X ");
+        boardValues.set(4, " X ");
+        boardValues.set(7, " X ");
+        assertTrue(gameBoard.isWinningGame(player));
+    }
+    @Test
+    public void shouldReturnWinningGameTrueWhenRightThreeInARowVertical() {
+        Player player = mock(Player.class);
+        when(player.getFormattedPlayerSymbol()).thenReturn(" X ");
+        boardValues.set(2, " X ");
+        boardValues.set(5, " X ");
+        boardValues.set(8, " X ");
+        assertTrue(gameBoard.isWinningGame(player));
+    }
+    @Test
+    public void shouldReturnWinningGameTrueWhenLeftToRightDiagonal() {
+        Player player = mock(Player.class);
+        when(player.getFormattedPlayerSymbol()).thenReturn(" X ");
+        boardValues.set(0, " X ");
+        boardValues.set(4, " X ");
+        boardValues.set(8, " X ");
+        assertTrue(gameBoard.isWinningGame(player));
+    }
+    @Test
+    public void shouldReturnWinningGameTrueWhenRightToLeftDiagonal() {
+        Player player = mock(Player.class);
+        when(player.getFormattedPlayerSymbol()).thenReturn(" X ");
+        boardValues.set(2, " X ");
+        boardValues.set(4, " X ");
+        boardValues.set(6, " X ");
+        assertTrue(gameBoard.isWinningGame(player));
+    }
 }

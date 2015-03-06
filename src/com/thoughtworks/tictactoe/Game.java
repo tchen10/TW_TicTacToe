@@ -41,7 +41,8 @@ public class Game {
     private void playNextTurn(Player player) {
         gameBoard.checkPlayerMove(player);
         gameBoard.print();
+        if (gameBoard.isWinningGame(player)) {
+            printStream.println("Player" + player.getFormattedPlayerSymbol() + "wins!");
+        }
     }
-
-
 }
