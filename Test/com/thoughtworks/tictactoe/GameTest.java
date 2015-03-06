@@ -40,9 +40,11 @@ public class GameTest {
 
     @Test
     public void shouldDisplayMessageWhenPlayerWins() {
-        when(player1.getFormattedPlayerSymbol()).thenReturn(" X ");
         when(gameBoard.isWinningGame(player1)).thenReturn(true);
+        when(player1.getFormattedPlayerSymbol()).thenReturn(" X ");
+
         game.play();
+
         verify(printStream).println("Player X wins!");
     }
 
