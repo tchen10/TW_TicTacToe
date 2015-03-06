@@ -8,6 +8,7 @@ public class Game {
     private Player player2;
     private PrintStream printStream;
     private GameBoard gameBoard;
+    private int turnCount;
 
 
     public Game(Player player1, Player player2, GameBoard gameBoard, PrintStream printStream) {
@@ -18,23 +19,16 @@ public class Game {
     }
 
     public void play() {
-        int turnCount = 0;
+        turnCount = 0;
         gameBoard.print();
         while (turnCount < 9) {
             takeAlternateTurns(turnCount);
             turnCount++;
         }
-        if (turnCount == 9) {
+        if (turnCount == 9 ) {
             printStream.println("Game is a draw");
         }
     }
-
-//    public boolean isWinner(Player player) {
-//        if () {
-//
-//        }
-//        return true;
-//    }
 
     private void takeAlternateTurns(int turnCount) {
         if (turnCount % 2 == 0) {

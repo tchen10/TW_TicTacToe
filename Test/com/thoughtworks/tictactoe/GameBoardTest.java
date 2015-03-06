@@ -71,10 +71,13 @@ public class GameBoardTest {
     }
 
     @Test
-    public void shouldReturnWinningGameTrueWhenThreeInARowHorizontal() {
+    public void shouldReturnWinningGameTrueWhenTopThreeInARowHorizontal() {
+        Player player = mock(Player.class);
+        when(player.getFormattedPlayerMove()).thenReturn(" X ");
         boardValues.set(0, " X ");
+        boardValues.set(1, " X ");
         boardValues.set(2, " X ");
-        boardValues.set(4, " X ");
-        assertTrue(gameBoard.isWinningGame());
+        assertTrue(gameBoard.isWinningGame(player));
     }
+
 }

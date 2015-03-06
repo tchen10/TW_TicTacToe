@@ -23,16 +23,21 @@ public class GameBoard {
         }
     }
 
-    public boolean isWinningGame() {
-        return true;
+    public boolean isWinningGame(Player player) {
+        String playerMove = player.getFormattedPlayerMove();
+        return boardValues.get(0).equals(playerMove) &&
+                boardValues.get(1).equals(playerMove) &&
+                boardValues.get(2).equals(playerMove);
+
     }
 
+
     public void print() {
-        printOneRow(boardValues, 0, 1, 2);
+        printOneRow(0, 1, 2);
         printStream.println("-----------");
-        printOneRow(boardValues, 3, 4, 5);
+        printOneRow(3, 4, 5);
         printStream.println("-----------");
-        printOneRow(boardValues, 6, 7, 8);
+        printOneRow(6, 7, 8);
     }
 
     private void makePlayerMove(Player player, String playerMove) {
@@ -41,13 +46,10 @@ public class GameBoard {
     }
 
     private boolean isValidMove(String playerMove) {
-        if (boardValues.contains(playerMove)) {
-            return true;
-        }
-        return false;
+        return boardValues.contains(playerMove);
     }
 
-    private void printOneRow(List<String> row, int left, int middle, int right) {
+    private void printOneRow(int left, int middle, int right) {
         printStream.printf(boardValues.get(left));
         printStream.printf("|");
         printStream.printf(boardValues.get(middle));
