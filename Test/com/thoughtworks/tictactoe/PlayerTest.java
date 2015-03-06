@@ -25,11 +25,11 @@ public class PlayerTest {
     }
 
     @Test
-    public void shouldReturnPlayerMoveWhenPrompted() throws IOException {
+    public void shouldReturnFormattedPlayerMoveWhenPrompted() throws IOException {
         when(reader.readLine()).thenReturn("1");
-        String playerMove = player.getPlayerMove();
+        String playerMove = player.getFormattedPlayerMove();
         verify(printStream).println("Enter a number between 1-9:");
-        assertEquals(playerMove, "1");
+        assertEquals(playerMove, " 1 ");
 
     }
 

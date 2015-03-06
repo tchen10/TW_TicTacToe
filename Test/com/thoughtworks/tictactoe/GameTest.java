@@ -28,6 +28,18 @@ public class GameTest {
         this.game = new Game(player1, player2, gameBoard, printStream);
     }
 
+    @Test
+    public void shouldAlternatePlayersWhenGameIsPlaying() {
+        game.play();
+        verify(gameBoard, times(5)).checkPlayerMove(player1);
+        verify(gameBoard, times(4)).checkPlayerMove(player2);
+    }
+
+    @Test
+    public void shouldCallGameADrawWhenGameIsPlayedToFull() {
+        game.play();
+        verify(printStream).println("Game is a draw");
+    }
 
 
 

@@ -13,47 +13,58 @@ public class GameBoard {
         setInitialBoardValues();
     }
 
-    public void setPlayerMove(Player player) {
-        String playerMove = " " + player.getPlayerMove() + " ";
-        int position = boardValues.indexOf(playerMove);
-        if (boardValues.contains(playerMove)) {
-            boardValues.set(position, player.getFormattedPlayerSymbol());
+    public void checkPlayerMove(Player player) {
+        String playerMove = player.getFormattedPlayerMove();
+        if (isValidMove(playerMove)) {
+            makePlayerMove(player, playerMove);
         } else {
             printStream.println("Location already taken");
-            player.getPlayerMove();
+            checkPlayerMove(player);
         }
+    }
+
+    public boolean isWinningGame() {
+        return true;
     }
 
     public void print() {
-        printOneRow(boardValues, 0, 5);
+        printOneRow(boardValues, 0, 1, 2);
         printStream.println("-----------");
-        printOneRow(boardValues, 5, 10);
+        printOneRow(boardValues, 3, 4, 5);
         printStream.println("-----------");
-        printOneRow(boardValues, 10, 15);
+        printOneRow(boardValues, 6, 7, 8);
     }
 
-    private void printOneRow(List<String> row, int from, int to) {
-        for (String space : row.subList(from,to)) {
-            printStream.printf(space);
+    private void makePlayerMove(Player player, String playerMove) {
+        int position = boardValues.indexOf(playerMove);
+        boardValues.set(position, player.getFormattedPlayerSymbol());
+    }
+
+    private boolean isValidMove(String playerMove) {
+        if (boardValues.contains(playerMove)) {
+            return true;
         }
+        return false;
+    }
+
+    private void printOneRow(List<String> row, int left, int middle, int right) {
+        printStream.printf(boardValues.get(left));
+        printStream.printf("|");
+        printStream.printf(boardValues.get(middle));
+        printStream.printf("|");
+        printStream.printf(boardValues.get(right));
         printStream.printf("\n");
     }
 
     private void setInitialBoardValues() {
         boardValues.add(" 1 ");
-        boardValues.add("|");
         boardValues.add(" 2 ");
-        boardValues.add("|");
         boardValues.add(" 3 ");
         boardValues.add(" 4 ");
-        boardValues.add("|");
         boardValues.add(" 5 ");
-        boardValues.add("|");
         boardValues.add(" 6 ");
         boardValues.add(" 7 ");
-        boardValues.add("|");
         boardValues.add(" 8 ");
-        boardValues.add("|");
         boardValues.add(" 9 ");
     }
 }

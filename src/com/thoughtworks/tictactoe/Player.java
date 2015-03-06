@@ -9,13 +9,13 @@ public class Player {
     private String playerSymbol;
     private PrintStream printStream;
 
-    public Player(String playerXO, BufferedReader reader, PrintStream printStream) {
-        this.playerSymbol = playerXO;
+    public Player(String playerSymbol, BufferedReader reader, PrintStream printStream) {
+        this.playerSymbol = playerSymbol;
         this.reader = reader;
         this.printStream = printStream;
     }
 
-    public String getPlayerMove() {
+    public String getFormattedPlayerMove() {
         printStream.println("Enter a number between 1-9:");
         String playerMove = "";
         try {
@@ -23,7 +23,7 @@ public class Player {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return playerMove;
+        return " " + playerMove + " ";
     }
 
     public String getFormattedPlayerSymbol() {

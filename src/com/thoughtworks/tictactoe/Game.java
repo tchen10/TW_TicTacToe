@@ -1,7 +1,6 @@
 package com.thoughtworks.tictactoe;
 
 import java.io.PrintStream;
-import java.util.List;
 
 public class Game {
 
@@ -18,16 +17,37 @@ public class Game {
         this.gameBoard = gameBoard;
     }
 
-    public void startPlaying() {
+    public void play() {
+        int turnCount = 0;
         gameBoard.print();
-        playNextTurn(player1);
-        playNextTurn(player2);
+        while (turnCount < 9) {
+            takeAlternateTurns(turnCount);
+            turnCount++;
+        }
+        if (turnCount == 9) {
+            printStream.println("Game is a draw");
+        }
     }
 
+//    public boolean isWinner(Player player) {
+//        if () {
+//
+//        }
+//        return true;
+//    }
 
-    public void playNextTurn(Player player) {
-        gameBoard.setPlayerMove(player);
+    private void takeAlternateTurns(int turnCount) {
+        if (turnCount % 2 == 0) {
+            playNextTurn(player1);
+        } else {
+            playNextTurn(player2);
+        }
+    }
+
+    private void playNextTurn(Player player) {
+        gameBoard.checkPlayerMove(player);
         gameBoard.print();
     }
+
 
 }

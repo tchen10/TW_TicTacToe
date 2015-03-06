@@ -12,6 +12,6 @@ public class Main {
                             new Player("O", new BufferedReader(new InputStreamReader(System.in)), System.out),
                             new GameBoard(boardValues, System.out),
                             System.out);
-        game.startPlaying();
+        game.play();
     }
 }
