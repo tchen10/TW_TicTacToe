@@ -35,7 +35,7 @@ public class PlayerTest {
 
     @Test
     public void shouldReturnFormattedXOForPlayer() {
-        String result = player.getFormattedPlayerXO();
+        String result = player.getFormattedPlayerSymbol();
         assertEquals(result, " X ");
 
     }

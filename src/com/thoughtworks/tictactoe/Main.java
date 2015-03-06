@@ -7,10 +7,10 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        List<String> gameBoard = new ArrayList<>();
+        List<String> boardValues = new ArrayList<>();
         Game game = new Game(new Player("X", new BufferedReader(new InputStreamReader(System.in)), System.out),
                             new Player("O", new BufferedReader(new InputStreamReader(System.in)), System.out),
-                            gameBoard,
+                            new GameBoard(boardValues, System.out),
                             System.out);
         game.startPlaying();
     }

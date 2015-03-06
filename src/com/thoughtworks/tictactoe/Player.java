@@ -6,11 +6,11 @@ import java.io.PrintStream;
 
 public class Player {
     private BufferedReader reader;
-    private String playerXO;
+    private String playerSymbol;
     private PrintStream printStream;
 
     public Player(String playerXO, BufferedReader reader, PrintStream printStream) {
-        this.playerXO = playerXO;
+        this.playerSymbol = playerXO;
         this.reader = reader;
         this.printStream = printStream;
     }
@@ -26,8 +26,8 @@ public class Player {
         return playerMove;
     }
 
-    public String getFormattedPlayerXO() {
-        return " " + playerXO + " ";
+    public String getFormattedPlayerSymbol() {
+        return " " + playerSymbol + " ";
     }
 
 }
