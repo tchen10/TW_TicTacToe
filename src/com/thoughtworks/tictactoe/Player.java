@@ -2,21 +2,17 @@ package com.thoughtworks.tictactoe;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintStream;
 
 public class Player {
     private BufferedReader reader;
     private String playerSymbol;
-    private PrintStream printStream;
 
-    public Player(String playerSymbol, BufferedReader reader, PrintStream printStream) {
+    public Player(String playerSymbol, BufferedReader reader) {
         this.playerSymbol = playerSymbol;
         this.reader = reader;
-        this.printStream = printStream;
     }
 
-    public String getFormattedPlayerMove() {
-        printStream.println("Enter a number between 1-9:");
+    public String makeMove() {
         String playerMove = "";
         try {
             playerMove = reader.readLine();
@@ -26,7 +22,7 @@ public class Player {
         return " " + playerMove + " ";
     }
 
-    public String getFormattedPlayerSymbol() {
+    public String formatSymbol() {
         return " " + playerSymbol + " ";
     }
 

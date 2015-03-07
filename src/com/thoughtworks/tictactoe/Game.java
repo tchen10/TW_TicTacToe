@@ -32,22 +32,29 @@ public class Game {
 
     private void takeAlternateTurns(int turnCount) {
         if (turnCount % 2 == 0) {
-            playNextTurn(player1);
+            playTurn(player1);
         } else {
-            playNextTurn(player2);
+            playTurn(player2);
         }
     }
 
-    private void playNextTurn(Player player) {
-        gameBoard.checkPlayerMove(player);
-        gameBoard.print();
-        winGame(player);
+    public void playTurn(Player player) {
+        printStream.println("Enter a number between 1-9:");
+        String playerMove = player.makeMove();
+        if (gameBoard.setPlayerMove(player.formatSymbol(), playerMove)) {
+            winGame(player);
+        } else {
+            printStream.println("Location already taken");
+            playTurn(player);
+        }
     }
 
+
     private void winGame(Player player) {
-        if (gameBoard.isWinningGame(player)) {
-            printStream.println("Player" + player.getFormattedPlayerSymbol() + "wins!");
+        if (gameBoard.isWinningGameBoard(player)) {
+            printStream.println("Player" + player.formatSymbol() + "wins!");
             turnCount = 10;
         }
     }
+
 }

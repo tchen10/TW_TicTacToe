@@ -13,18 +13,18 @@ public class GameBoard {
         setInitialBoardValues();
     }
 
-    public void checkPlayerMove(Player player) {
-        String playerMove = player.getFormattedPlayerMove();
-        if (isValidMove(playerMove)) {
-            makePlayerMove(player, playerMove);
-        } else {
-            printStream.println("Location already taken");
-            checkPlayerMove(player);
+    public boolean setPlayerMove(String playerSymbol, String playerMove) {
+        if (isValidPlayerMove(playerMove)) {
+            int position = boardValues.indexOf(playerMove);
+            boardValues.set(position, playerSymbol);
+            print();
+            return true;
         }
+        return false;
     }
 
-    public boolean isWinningGame(Player player) {
-        String playerSymbol = player.getFormattedPlayerSymbol();
+    public boolean isWinningGameBoard(Player player) {
+        String playerSymbol = player.formatSymbol();
         return checkWinningLine(playerSymbol, 0, 1, 2) ||
                 checkWinningLine(playerSymbol, 3, 4, 5) ||
                 checkWinningLine(playerSymbol, 6, 7, 8) ||
@@ -33,6 +33,18 @@ public class GameBoard {
                 checkWinningLine(playerSymbol, 2, 5, 8) ||
                 checkWinningLine(playerSymbol, 0, 4, 8) ||
                 checkWinningLine(playerSymbol, 2, 4, 6);
+    }
+
+    public void print() {
+        printOneRow(0, 1, 2);
+        printStream.println("-----------");
+        printOneRow(3, 4, 5);
+        printStream.println("-----------");
+        printOneRow(6, 7, 8);
+    }
+
+    private boolean isValidPlayerMove(String playerMove) {
+        return boardValues.contains(playerMove);
     }
 
     private boolean checkWinningLine(String playerMove, int num1, int num2, int num3) {
@@ -49,42 +61,13 @@ public class GameBoard {
         return moves == 3;
     }
 
-
-    public void print() {
-        printOneRow(0, 1, 2);
-        printStream.println("-----------");
-        printOneRow(3, 4, 5);
-        printStream.println("-----------");
-        printOneRow(6, 7, 8);
-    }
-
-    private void makePlayerMove(Player player, String playerMove) {
-        int position = boardValues.indexOf(playerMove);
-        boardValues.set(position, player.getFormattedPlayerSymbol());
-    }
-
-    private boolean isValidMove(String playerMove) {
-        return boardValues.contains(playerMove);
-    }
-
     private void printOneRow(int left, int middle, int right) {
-        printStream.printf(boardValues.get(left));
-        printStream.printf("|");
-        printStream.printf(boardValues.get(middle));
-        printStream.printf("|");
-        printStream.printf(boardValues.get(right));
-        printStream.printf("\n");
+        printStream.print(boardValues.get(left) + "|" + boardValues.get(middle) + "|" + boardValues.get(right) + "\n");
     }
 
     private void setInitialBoardValues() {
-        boardValues.add(" 1 ");
-        boardValues.add(" 2 ");
-        boardValues.add(" 3 ");
-        boardValues.add(" 4 ");
-        boardValues.add(" 5 ");
-        boardValues.add(" 6 ");
-        boardValues.add(" 7 ");
-        boardValues.add(" 8 ");
-        boardValues.add(" 9 ");
+        for (int i = 1; i < 10; i++) {
+            boardValues.add(" " + i + " ");
+        }
     }
 }
